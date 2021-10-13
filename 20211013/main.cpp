@@ -117,26 +117,52 @@ int main()
 
 class ArrayClass
 {
+private:
+	int* newArray;
+
 public:
 	ArrayClass()
 	{
-		newArray = new int[1000];
-		for (int i = 0; i < 1000; i++)
-		{
-			newArray[i] = i * 1;
-			printf("%d\n", newArray[i]);
-		}
+		newArray = nullptr;
 	}
+
+	void Create(int array);
+	void Get(int getArrayNum);
+	void Set(int setArrayNum);
+
 	~ArrayClass()
 	{
 		delete[] newArray;
 		newArray = nullptr;
 		printf("%p\n", newArray);
 	}
-private:
-	int* newArray;
 };
+
+void ArrayClass::Create(int array)
+{
+	newArray = new int[array];
+}
+
+void ArrayClass::Get(int getArrayNum)
+{
+	printf("num = %d\n", newArray[getArrayNum]);
+}
+
+void ArrayClass::Set(int setArrayNum)
+{
+	newArray[setArrayNum] = setArrayNum;
+}
+
 int main()
 {
-	ArrayClass Array;
+	ArrayClass array;
+	array.Create(1000);
+	for (int i = 0; i < 1000; i++)
+	{
+		array.Set(i);
+	}
+	for (int i = 0; i < 1000; i++)
+	{
+		array.Get(i);
+	}
 }
